@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-outfit), Arial, Helvetica, sans-serif;
+  
+  --color-calendar-bg: #ffffff;
+  --color-calendar-card: #ffffff;
+  --color-text-main: #1e293b; /* slate-800 */
+  --color-text-muted: #64748b; /* slate-500 */
+  
+  --color-primary-light: #e0f2fe; /* sky-100 */
+  --color-primary: #0284c7; /* sky-600 */
+  --color-primary-dark: #0369a1; /* sky-700 */
+
+  /* Used for continuous selections! */
+  --color-selection-bg: #f0f9ff; /* sky-50 */
+}
+
+body {
+  background-color: #f1f5f9; /* slate-100 soft background */
+  color: var(--color-text-main);
+}
+
+/* Base scrollbar styling for the textarea */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Custom Calendar Animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes grid-pop {
+  0% { opacity: 0; transform: scale(0.98) translateY(5px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-grid-pop {
+  opacity: 0;
+  animation: grid-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
