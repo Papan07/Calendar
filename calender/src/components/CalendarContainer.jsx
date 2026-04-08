@@ -5,6 +5,7 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
 import NotesPanel from "./NotesPanel";
 import useCalendar from "./useCalendar";
+import { useState, useEffect } from "react";
 
 const monthImages = [
     "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=1200&h=400",
@@ -31,6 +32,17 @@ export default function CalendarContainer() {
         nextMonth,
         prevMonth,
     } = useCalendar();
+
+    const [mounted, setMounted] = useState(false);
+    const [realTime, setRealTime] = useState(new Date());
+
+    useEffect(() => {
+        setMounted(true);
+        const timer = setInterval(() => {
+            setRealTime(new Date());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     // Generate some fake spiral binder holes
     const spirals = Array.from({ length: 32 }).map((_, i) => i);
@@ -95,14 +107,32 @@ export default function CalendarContainer() {
 
                         {/* Title and Controls over the Blue Area */}
                         <div className="absolute bottom-[30%] md:bottom-[25%] right-8 z-30 flex items-end gap-6 text-right cursor-default">
-                            <div>
-                                <div className="text-2xl md:text-3xl text-white font-medium tracking-wide">
-                                    {currentMonth ? currentMonth.getFullYear() : "2022"}
+                            {mounted && (
+                                <div className="flex flex-col items-end">
+                                    <div className="text-lg md:text-xl text-white/80 font-medium tracking-wide mb-1 font-mono">
+                                        {realTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                    </div>
+                                    <div className="text-2xl md:text-3xl text-white font-medium tracking-wide">
+                                        {realTime.toLocaleDateString('default', { weekday: 'long' })}, {realTime.getDate()} {realTime.getFullYear()}
+                                    </div>
+                                    <div className="text-4xl md:text-5xl text-white font-bold leading-none tracking-wider mt-1">
+                                        {currentMonth ? currentMonth.toLocaleString('default', { month: 'long' }).toUpperCase() : "JANUARY"}
+                                    </div>
                                 </div>
-                                <div className="text-4xl md:text-5xl text-white font-bold leading-none tracking-wider">
-                                    {currentMonth ? currentMonth.toLocaleString('default', { month: 'long' }).toUpperCase() : "JANUARY"}
+                            )}
+                            {!mounted && (
+                                <div className="flex flex-col items-end">
+                                    <div className="text-lg md:text-xl text-transparent font-medium tracking-wide mb-1 font-mono">
+                                        00:00:00
+                                    </div>
+                                    <div className="text-2xl md:text-3xl text-white font-medium tracking-wide">
+                                        {currentMonth ? currentMonth.getFullYear() : "2022"}
+                                    </div>
+                                    <div className="text-4xl md:text-5xl text-white font-bold leading-none tracking-wider mt-1">
+                                        {currentMonth ? currentMonth.toLocaleString('default', { month: 'long' }).toUpperCase() : "JANUARY"}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
 

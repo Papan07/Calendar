@@ -32,12 +32,12 @@ export default function CalendarGrid({
     });
 
     const weekDays = [
-        { name: "MON", weekend: false }, 
-        { name: "TUE", weekend: false }, 
-        { name: "WED", weekend: false }, 
-        { name: "THU", weekend: false }, 
-        { name: "FRI", weekend: false }, 
-        { name: "SAT", weekend: true }, 
+        { name: "MON", weekend: false },
+        { name: "TUE", weekend: false },
+        { name: "WED", weekend: false },
+        { name: "THU", weekend: false },
+        { name: "FRI", weekend: false },
+        { name: "SAT", weekend: true },
         { name: "SUN", weekend: true }
     ];
 
@@ -46,8 +46,8 @@ export default function CalendarGrid({
             {/* Day of Week Headers */}
             <div className="grid grid-cols-7 gap-y-4 gap-x-0 md:gap-x-2">
                 {weekDays.map((day) => (
-                    <div 
-                        key={day.name} 
+                    <div
+                        key={day.name}
                         className={`text-center text-xs md:text-sm font-bold uppercase tracking-wider mb-2 ${day.weekend ? 'text-[#128FD2]' : 'text-slate-800'}`}
                     >
                         {day.name}
@@ -61,7 +61,7 @@ export default function CalendarGrid({
                     const isEnd = endDate && day.toDateString() === endDate.toDateString();
                     const inRange = isInRange(day);
                     const isTodayDate = isToday(day);
-                    
+
                     // Determine if it's a weekend (0 is Sunday, 6 is Saturday)
                     const dayOfWeek = day.getDay();
                     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;

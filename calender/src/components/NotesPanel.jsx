@@ -33,8 +33,8 @@ export default function NotesPanel({ startDate, endDate }) {
       <div className="flex-1 relative w-full pr-12 md:pr-16">
         {/* Notebook lines effect using actual physical dom nodes for precision */}
         <div className="absolute inset-0 pointer-events-none flex flex-col justify-start gap-0">
-          {[1,2,3,4,5,6,7,8].map(i => (
-             <div key={i} className="border-b border-gray-300 w-full h-[36px]" />
+          {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+            <div key={i} className="border-b border-gray-300 w-full h-[36px]" />
           ))}
         </div>
 

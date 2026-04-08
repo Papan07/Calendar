@@ -30,10 +30,10 @@ export default function DayCell({
                 className={clsx(
                     "relative z-10 w-8 md:w-10 h-8 md:h-10 flex items-center justify-center text-sm md:text-[15px] font-bold transition-all duration-200 rounded-full",
                     // Not current month -> faded text
-                    !isCurrentMonthDay && "text-slate-200", 
-                    
+                    !isCurrentMonthDay && "text-slate-200",
+
                     // Current month -> specific colors
-                    isCurrentMonthDay && !isWeekend && "text-slate-800 hover:bg-slate-100", 
+                    isCurrentMonthDay && !isWeekend && "text-slate-800 hover:bg-slate-100",
                     isCurrentMonthDay && isWeekend && "text-[#128FD2] hover:bg-[#f0f9ff]",
 
                     // Range selection styles overlay gracefully
